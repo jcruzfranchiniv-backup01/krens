@@ -24,6 +24,11 @@ export default defineConfig({
       ADMIN_IMAGE_HOSTS: envField.string({ context: 'server', access: 'public', optional: true }),
       UPSTASH_REDIS_REST_URL: envField.string({ context: 'server', access: 'secret', optional: true }),
       UPSTASH_REDIS_REST_TOKEN: envField.string({ context: 'server', access: 'secret', optional: true }),
+      // Nombres que genera el Marketplace de Vercel (sin prefijo y con prefijo STORAGE).
+      KV_REST_API_URL: envField.string({ context: 'server', access: 'secret', optional: true }),
+      KV_REST_API_TOKEN: envField.string({ context: 'server', access: 'secret', optional: true }),
+      STORAGE_KV_REST_API_URL: envField.string({ context: 'server', access: 'secret', optional: true }),
+      STORAGE_KV_REST_API_TOKEN: envField.string({ context: 'server', access: 'secret', optional: true }),
     },
   },
 });

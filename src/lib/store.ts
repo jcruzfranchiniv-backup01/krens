@@ -1,4 +1,14 @@
-import { UPSTASH_REDIS_REST_TOKEN, UPSTASH_REDIS_REST_URL } from 'astro:env/server';
+import {
+  KV_REST_API_TOKEN,
+  KV_REST_API_URL,
+  STORAGE_KV_REST_API_TOKEN,
+  STORAGE_KV_REST_API_URL,
+  UPSTASH_REDIS_REST_TOKEN,
+  UPSTASH_REDIS_REST_URL,
+} from 'astro:env/server';
+
+const REST_URL = UPSTASH_REDIS_REST_URL ?? KV_REST_API_URL ?? STORAGE_KV_REST_API_URL;
+const REST_TOKEN = UPSTASH_REDIS_REST_TOKEN ?? KV_REST_API_TOKEN ?? STORAGE_KV_REST_API_TOKEN;
 
 /** Persistencia mínima que necesita el panel: sesiones, contadores, URLs de imágenes y auditoría. */
 export interface Store {
@@ -118,7 +128,7 @@ class MemoryStore implements Store {
 const globalStore = globalThis as { __krensMemoryStore?: MemoryStore };
 
 export function getStore(): Store {
-  if (UPSTASH_REDIS_REST_URL && UPSTASH_REDIS_REST_TOKEN) return new UpstashStore(UPSTASH_REDIS_REST_URL, UPSTASH_REDIS_REST_TOKEN);
+  if (REST_URL && REST_TOKEN) return new UpstashStore(REST_URL, REST_TOKEN);
   if (import.meta.env.DEV) return (globalStore.__krensMemoryStore ??= new MemoryStore());
   throw new StoreUnavailableError('UPSTASH_REDIS_REST_URL / UPSTASH_REDIS_REST_TOKEN no configurados');
 }
