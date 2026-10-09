@@ -1,0 +1,27 @@
+---
+import { site } from '../content';
+import Icon from './Icon.astro';
+
+const { why } = site;
+type IconName = Parameters<typeof Icon>[0]['name'];
+---
+
+<section class="section why" id="empresas" aria-labelledby="why-title">
+  <div class="container">
+    <header class="section-head section-head--center reveal">
+      <p class="eyebrow">{why.eyebrow}</p>
+      <h2 id="why-title">{why.title}</h2>
+    </header>
+    <ul class="why__grid">
+      {
+        why.items.map((item) => (
+          <li class="why__item reveal">
+            <Icon name={item.icon as IconName} />
+            <h3>{item.title}</h3>
+            <p>{item.text}</p>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>

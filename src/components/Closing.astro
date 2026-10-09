@@ -1,0 +1,18 @@
+---
+import { site } from '../content';
+import { waLink } from '../lib/wa';
+import Photo from './Photo.astro';
+import Icon from './Icon.astro';
+
+const { closing } = site;
+---
+
+<section class="closing on-dark" aria-labelledby="closing-title">
+  <Photo name={closing.image} alt={closing.alt} sizes="100vw" widths={[640, 1200, 1800]} ratio="16 / 9" />
+  <div class="container closing__inner reveal">
+    <h2 id="closing-title">{closing.title}</h2>
+    <a class="btn btn--light" href={waLink('closing')} data-wa data-origin="closing" target="_blank" rel="noopener">
+      <Icon name="whatsapp" />{closing.cta}
+    </a>
+  </div>
+</section>

@@ -1,0 +1,37 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Icon from '../components/Icon.astro';
+import { site } from '../content';
+import { waLink } from '../lib/wa';
+
+export const prerender = false;
+
+const { thanks, whatsappMessages, contact } = site;
+---
+
+<Layout title={`${thanks.title} | ${site.brand.name}`} noindex>
+  <section class="thanks">
+    <div class="container">
+      <h1>{thanks.title}</h1>
+      <p>{thanks.text}</p>
+      <div class="thanks__actions">
+        <a
+          class="btn btn--solid"
+          href={waLink('thanks')}
+          data-wa
+          data-origin="thanks"
+          data-thanks-wa
+          data-number={contact.whatsappNumber}
+          data-template={whatsappMessages.thanks}
+          target="_blank"
+          rel="noopener"
+        >
+          <Icon name="whatsapp" />{thanks.cta}
+        </a>
+        <a class="btn btn--ghost" href="/">{thanks.back}</a>
+      </div>
+    </div>
+  </section>
+  <script id="event-labels" type="application/json" set:html={JSON.stringify(Object.fromEntries(site.form.eventOptions.map((o) => [o.id, o.label])))} />
+  <script id="guest-labels" type="application/json" set:html={JSON.stringify(Object.fromEntries(site.form.guestOptions.map((o) => [o.id, o.label])))} />
+</Layout>

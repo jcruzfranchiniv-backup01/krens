@@ -1,0 +1,25 @@
+---
+const paths = {
+  'arrow-right': 'M5 12h14M13 6l6 6-6 6',
+  'arrow-left': 'M19 12H5M11 6l-6 6 6 6',
+  whatsapp: 'M3 21l1.6-4.7A8.5 8.5 0 1 1 8 19.4L3 21zM9 8.5c0 3.5 3 6.5 6.5 6.5l1-1.5-2-1-1 .8c-1-.4-2-1.4-2.4-2.4l.8-1-1-2L9 8.5z',
+  chef: 'M7 14a4 4 0 1 1 1.5-7.7A4 4 0 0 1 15.5 6.3 4 4 0 1 1 17 14v5H7v-5zM7 17h10',
+  people: 'M9 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM3 20c0-3.3 2.7-6 6-6s6 2.7 6 6M16 5.5a3 3 0 0 1 0 5.5M18 14.3c1.8.8 3 2.6 3 4.7',
+  star: 'M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9L12 3z',
+  leaf: 'M5 19C5 10 10 5 20 4c0 10-5 15-14 15zM5 19l8-8',
+  calendar: 'M4 6h16v14H4zM4 10h16M8 3v4M16 3v4',
+  clock: 'M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18zM12 7v5l3 2',
+  instagram: 'M5 4h14a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1zM12 16a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM17 7h.01',
+  menu: 'M4 7h16M4 12h16M4 17h16',
+  close: 'M6 6l12 12M18 6L6 18',
+  heart: 'M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.5A4 4 0 0 1 19 10c0 5.6-7 10-7 10z',
+} as const;
+
+interface Props {
+  name: keyof typeof paths;
+  class?: string;
+}
+const { name, class: cls } = Astro.props;
+---
+
+<svg class:list={['icon', cls]} viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d={paths[name]}></path></svg>

@@ -1,0 +1,45 @@
+---
+import { Image } from 'astro:assets';
+import { site } from '../content';
+import { findImage } from '../lib/images';
+
+const { trust } = site;
+const stats = trust.stats.filter((s) => s.value.trim() && s.label.trim());
+const logos = trust.logos.flatMap((l) => {
+  const image = findImage(l.image);
+  return image ? [{ image, alt: l.alt }] : [];
+});
+const empty = stats.length === 0 && logos.length === 0;
+const isDev = import.meta.env.DEV;
+---
+
+{
+  /* Sin datos reales no se muestra nada en producción: no se inventan cifras ni logos. */
+  empty && !isDev ? null : (
+    <section class="trust" aria-label={trust.title}>
+      <div class="container reveal">
+        <p class="trust__title">{trust.title}</p>
+        {empty ? (
+          <p class="trust__placeholder">
+            Franja de confianza vacía. Completá "trust.stats" y "trust.logos" en src/content/site.json (sólo se ve en desarrollo).
+          </p>
+        ) : (
+          <>
+            {stats.length > 0 && (
+              <ul class="trust__stats">
+                {stats.map((s) => (
+                  <li><p class="trust__value">{s.value}</p><p class="trust__label">{s.label}</p></li>
+                ))}
+              </ul>
+            )}
+            {logos.length > 0 && (
+              <ul class="trust__logos">
+                {logos.map((l) => <li><Image src={l.image} alt={l.alt} height={76} loading="lazy" /></li>)}
+              </ul>
+            )}
+          </>
+        )}
+      </div>
+    </section>
+  )
+}

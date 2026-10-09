@@ -1,0 +1,43 @@
+---
+import { site } from '../content';
+import { waLink } from '../lib/wa';
+import Photo from './Photo.astro';
+
+const { promos } = site;
+---
+
+{
+  promos.items.length > 0 && (
+    <section class="section" id="promociones" aria-labelledby="promos-title">
+      <div class="container">
+        <header class="section-head reveal">
+          <p class="eyebrow">{promos.eyebrow}</p>
+          <h2 id="promos-title">{promos.title}</h2>
+          {promos.intro && <p>{promos.intro}</p>}
+        </header>
+        <ul class="promos">
+          {promos.items.map((promo) => (
+            <li class="reveal">
+              <a
+                class="promo"
+                href={waLink('promo', { promo: promo.title ?? '' })}
+                data-wa
+                data-origin="promo"
+                target="_blank"
+                rel="noopener"
+              >
+                <Photo name={promo.image} alt={promo.alt} sizes="(min-width: 980px) 360px, 90vw" ratio="1 / 1" />
+                {(promo.title || promo.text) && (
+                  <div class="promo__body">
+                    {promo.title && <h3>{promo.title}</h3>}
+                    {promo.text && <p>{promo.text}</p>}
+                  </div>
+                )}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  )
+}

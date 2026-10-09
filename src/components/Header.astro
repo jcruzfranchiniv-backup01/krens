@@ -1,0 +1,48 @@
+---
+import { Image } from 'astro:assets';
+import { site } from '../content';
+import { findImage } from '../lib/images';
+import { waLink } from '../lib/wa';
+import Icon from './Icon.astro';
+
+import { optimizeImageUrl } from '../core/imageUrl';
+
+const remoteLogo = Astro.locals.images?.[site.brand.logo.image];
+const logo = remoteLogo ? undefined : findImage(site.brand.logo.image);
+const wa = waLink('header');
+---
+
+<header class="header">
+  <div class="container header__inner">
+    <a class="logo" href="/" aria-label={`${site.brand.name} – inicio`}>
+      {
+        remoteLogo ? (
+          <img src={optimizeImageUrl(remoteLogo, { height: 80 })} alt={site.brand.logo.alt} height="40" />
+        ) : logo ? (
+          <Image src={logo} alt={site.brand.logo.alt} height={80} loading="eager" />
+        ) : (
+          <>
+            <span class="logo__word">{site.brand.name.toUpperCase()}</span>
+            <span class="logo__tag">{site.brand.tagline}</span>
+          </>
+        )
+      }
+    </a>
+    <nav class="nav" aria-label="Principal">
+      {site.nav.map((item) => <a href={`/${item.href}`}>{item.label}</a>)}
+    </nav>
+    <a class="btn btn--solid header__cta" href={wa} data-wa data-origin="header" target="_blank" rel="noopener">
+      <Icon name="whatsapp" />{site.headerCta}
+    </a>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="mobile-nav" data-menu-toggle>
+      <span class="sr-only" style="position:absolute;left:-9999px">Abrir menú</span>
+      <Icon name="menu" />
+    </button>
+  </div>
+  <nav class="mobile-nav" id="mobile-nav" aria-label="Menú móvil" data-open="false">
+    {site.nav.map((item) => <a href={`/${item.href}`}>{item.label}</a>)}
+    <a class="btn btn--solid" href={wa} data-wa data-origin="header-mobile" target="_blank" rel="noopener">
+      <Icon name="whatsapp" />{site.headerCta}
+    </a>
+  </nav>
+</header>

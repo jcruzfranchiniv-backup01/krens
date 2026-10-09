@@ -1,0 +1,46 @@
+---
+import { site } from '../content';
+import { findImage } from '../lib/images';
+import Photo from './Photo.astro';
+
+const { gallery } = site;
+---
+
+<section class="section section--alt" aria-labelledby="gallery-title">
+  <div class="container">
+    <header class="section-head reveal">
+      <p class="eyebrow">{gallery.eyebrow}</p>
+      <h2 id="gallery-title">{gallery.title}</h2>
+    </header>
+    <ul class="gallery">
+      {
+        gallery.items.map((item, index) => (
+          <li class="reveal">
+            {item.type === 'video' && item.src ? (
+              <div class="photo" style="aspect-ratio: 1">
+                <video
+                  src={item.src}
+                  poster={Astro.locals.images?.[item.image] ?? findImage(item.image)?.src}
+                  muted
+                  loop
+                  playsinline
+                  preload="none"
+                  controls
+                  aria-label={item.alt}
+                ></video>
+              </div>
+            ) : (
+              <Photo
+                name={item.image}
+                alt={item.alt}
+                sizes={index === 0 ? '(min-width: 900px) 50vw, 50vw' : '(min-width: 900px) 25vw, 50vw'}
+                widths={[400, 800, 1100]}
+                ratio="1 / 1"
+              />
+            )}
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>

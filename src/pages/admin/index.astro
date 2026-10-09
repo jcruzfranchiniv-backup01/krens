@@ -1,0 +1,112 @@
+---
+import AdminLayout from '../../layouts/AdminLayout.astro';
+import { authConfigured, readSession } from '../../lib/auth';
+import { getAudit, getImageOverrides } from '../../lib/imageOverrides';
+import { listSlots } from '../../lib/slots';
+import { findImage } from '../../lib/images';
+import { optimizeImageUrl } from '../../core/imageUrl';
+
+export const prerender = false;
+
+const configured = authConfigured();
+const session = configured ? await readSession(Astro.cookies) : null;
+
+const slots = session ? listSlots() : [];
+const overrides = session ? await getImageOverrides().catch(() => ({}) as Record<string, string>) : {};
+const audit = session ? await getAudit(10).catch(() => []) : [];
+const groups = [...new Set(slots.map((s) => s.group))];
+const dateFormat = new Intl.DateTimeFormat('es-AR', { dateStyle: 'short', timeStyle: 'short', timeZone: 'America/Argentina/Buenos_Aires' });
+---
+
+<AdminLayout title="Panel | Krens">
+  {
+    !session ? (
+      <main class="login">
+        <form class="login__card" id="login-form" novalidate>
+          <h1>Krens · Panel</h1>
+          {configured ? (
+            <>
+              <div class="field">
+                <label for="username">Usuario</label>
+                <input id="username" name="username" autocomplete="username" required />
+              </div>
+              <div class="field">
+                <label for="password">Clave</label>
+                <input id="password" name="password" type="password" autocomplete="current-password" required />
+              </div>
+              <p class="msg" id="login-msg" role="alert" hidden></p>
+              <button class="btn btn--solid" type="submit">Ingresar</button>
+            </>
+          ) : (
+            <p class="msg" role="alert">El panel todavía no está configurado (faltan ADMIN_USERNAME y ADMIN_PASSWORD_HASH).</p>
+          )}
+        </form>
+      </main>
+    ) : (
+      <main class="panel" data-csrf={session.csrf}>
+        <header class="panel__top">
+          <div>
+            <h1>Imágenes del sitio</h1>
+            <p class="muted">Pegá la URL de Cloudinary de cada imagen. Los cambios se ven en el sitio en ~1 minuto.</p>
+          </div>
+          <div class="panel__actions">
+            <a class="btn btn--ghost" href="/" target="_blank" rel="noopener">Ver sitio</a>
+            <button class="btn btn--ghost" type="button" id="logout">Salir</button>
+          </div>
+        </header>
+
+        {groups.map((group) => (
+          <section class="group" aria-labelledby={`g-${group}`}>
+            <h2 id={`g-${group}`}>{group}</h2>
+            <ul>
+              {slots
+                .filter((s) => s.group === group)
+                .map((slot) => {
+                  const url = overrides[slot.id];
+                  const local = findImage(slot.id);
+                  return (
+                    <li class="slot" data-slot={slot.id}>
+                      <div class="slot__preview">
+                        {url ? <img src={optimizeImageUrl(url, { width: 240 })} alt="" loading="lazy" width="120" height="90" /> : local ? <img src={local.src} alt="" loading="lazy" width="120" height="90" /> : <span class="slot__empty">Sin imagen</span>}
+                      </div>
+                      <form class="slot__form">
+                        <label for={`u-${slot.id}`}>
+                          <strong>{slot.label}</strong>
+                          <span class="muted"> · ideal {slot.size}</span>
+                        </label>
+                        <input id={`u-${slot.id}`} name="url" type="url" inputmode="url" placeholder="https://res.cloudinary.com/…" value={url ?? ''} autocomplete="off" />
+                        <p class="msg" role="status" hidden></p>
+                        <div class="slot__buttons">
+                          <button class="btn btn--solid" type="submit">Guardar</button>
+                          <button class="btn btn--ghost" type="button" data-reset disabled={!url}>Restablecer</button>
+                          <span class="badge-state" data-state>{url ? 'Cloudinary' : local ? 'Original del sitio' : 'Pendiente'}</span>
+                        </div>
+                      </form>
+                    </li>
+                  );
+                })}
+            </ul>
+          </section>
+        ))}
+
+        <section class="group">
+          <h2>Últimos cambios</h2>
+          {audit.length === 0 ? (
+            <p class="muted">Todavía no hay cambios.</p>
+          ) : (
+            <ul class="audit">
+              {audit.map((entry) => (
+                <li>
+                  {dateFormat.format(new Date(entry.at))} · {entry.actor} · {entry.action === 'set' ? 'cambió' : 'restableció'} <code>{entry.slot}</code>
+                </li>
+              ))}
+            </ul>
+          )}
+        </section>
+      </main>
+    )
+  }
+  <script>
+    import '../../scripts/admin';
+  </script>
+</AdminLayout>

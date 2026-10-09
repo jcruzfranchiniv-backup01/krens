@@ -1,0 +1,38 @@
+---
+import { site } from '../content';
+import { waLink } from '../lib/wa';
+
+const { contact, brand } = site;
+---
+
+<footer class="footer" id="contacto">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <p class="serif" style="font-size:2rem">{brand.name.toUpperCase()}</p>
+        <p style="color:var(--muted)">{brand.badgeText}</p>
+      </div>
+      <div>
+        <h3>Visitanos</h3>
+        <address style="font-style:normal">{contact.address}</address>
+        {
+          contact.hours.length > 0 && (
+            <ul style="margin-top:10px">
+              {contact.hours.map((line) => <li>{line}</li>)}
+            </ul>
+          )
+        }
+        {contact.deliveryZones.length > 0 && <p style="margin-top:10px">Entregas: {contact.deliveryZones.join(', ')}</p>}
+      </div>
+      <div>
+        <h3>Contacto</h3>
+        <ul>
+          <li><a href={waLink('footer')} data-wa data-origin="footer" target="_blank" rel="noopener">WhatsApp</a></li>
+          <li><a href={contact.instagramUrl} target="_blank" rel="noopener">Instagram {contact.instagramHandle}</a></li>
+          <li><a href={contact.linktreeUrl} target="_blank" rel="noopener">Más enlaces (Linktree)</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="footer__legal">© {new Date().getFullYear()} {brand.name}. Todos los derechos reservados.</p>
+  </div>
+</footer>

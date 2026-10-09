@@ -1,0 +1,57 @@
+---
+import { Picture } from 'astro:assets';
+import { findImage } from '../lib/images';
+import { optimizeImageUrl, parseRatio } from '../core/imageUrl';
+
+interface Props {
+  name: string;
+  alt: string;
+  sizes: string;
+  widths?: number[];
+  eager?: boolean;
+  /** Proporción CSS (ancho / alto): reserva el espacio y evita saltos de layout. */
+  ratio?: string;
+  class?: string;
+}
+const { name, alt, sizes, widths = [480, 800, 1200], eager = false, ratio = '4 / 3', class: cls } = Astro.props;
+
+// Prioridad: URL cargada en /admin (Cloudinary) > archivo local de src/assets > placeholder.
+const remote = Astro.locals.images?.[name];
+const image = remote ? undefined : findImage(name);
+const widest = widths[widths.length - 1] ?? 1200;
+const { w, h } = parseRatio(ratio);
+const srcset = remote ? widths.map((width) => `${optimizeImageUrl(remote, { width, ratio })} ${width}w`).join(', ') : '';
+---
+
+<div class:list={['photo', !image && !remote && 'photo--missing', cls]} style={`aspect-ratio: ${ratio}`}>
+  {
+    remote ? (
+      <img
+        src={optimizeImageUrl(remote, { width: widest, ratio })}
+        srcset={srcset}
+        sizes={sizes}
+        alt={alt}
+        width={widest}
+        height={Math.round((widest * h) / w)}
+        loading={eager ? 'eager' : 'lazy'}
+        decoding={eager ? 'sync' : 'async'}
+        fetchpriority={eager ? 'high' : 'auto'}
+      />
+    ) : image ? (
+      <Picture
+        src={image}
+        alt={alt}
+        widths={widths}
+        sizes={sizes}
+        formats={['webp']}
+        fallbackFormat="webp"
+        quality={72}
+        loading={eager ? 'eager' : 'lazy'}
+        decoding={eager ? 'sync' : 'async'}
+        fetchpriority={eager ? 'high' : 'auto'}
+      />
+    ) : (
+      import.meta.env.DEV && <p class="dev-note" aria-hidden="true">Foto pendiente: {name}</p>
+    )
+  }
+</div>

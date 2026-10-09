@@ -1,0 +1,62 @@
+---
+import { site } from '../content';
+
+const { form } = site;
+const f = form.fields;
+---
+
+<section class="section" id="cotizar" aria-labelledby="quote-title" data-quote-section>
+  <div class="container quote">
+    <header class="section-head reveal">
+      <p class="eyebrow">{form.eyebrow}</p>
+      <h2 id="quote-title">{form.title}</h2>
+      <p>{form.intro}</p>
+    </header>
+    <form class="quote__form reveal" id="quote-form" method="post" action="/api/v1/leads" novalidate>
+      <div class="form-alert" role="alert" tabindex="-1" data-form-alert></div>
+
+      <div class="field field--wide" data-field="name">
+        <label for="f-name">{f.name.label}</label>
+        <input id="f-name" name="name" type="text" autocomplete="name" placeholder={f.name.placeholder} required aria-describedby="e-name" />
+        <p class="field__error" id="e-name"></p>
+      </div>
+
+      <div class="field" data-field="eventType">
+        <label for="f-eventType">{f.eventType.label}</label>
+        <select id="f-eventType" name="eventType" required aria-describedby="e-eventType">
+          <option value="">{f.eventType.placeholder}</option>
+          {form.eventOptions.map((o) => <option value={o.id}>{o.label}</option>)}
+        </select>
+        <p class="field__error" id="e-eventType"></p>
+      </div>
+
+      <div class="field" data-field="guests">
+        <label for="f-guests">{f.guests.label}</label>
+        <select id="f-guests" name="guests" required aria-describedby="e-guests">
+          <option value="">{f.guests.placeholder}</option>
+          {form.guestOptions.map((o) => <option value={o.id}>{o.label}</option>)}
+        </select>
+        <p class="field__error" id="e-guests"></p>
+      </div>
+
+      <div class="field" data-field="eventDate">
+        <label for="f-eventDate">{f.eventDate.label}</label>
+        <input id="f-eventDate" name="eventDate" type="date" aria-describedby="e-eventDate" />
+        <p class="field__error" id="e-eventDate"></p>
+      </div>
+
+      <div class="field" data-field="phone">
+        <label for="f-phone">{f.phone.label}</label>
+        <input id="f-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder={f.phone.placeholder} required aria-describedby="e-phone" />
+        <p class="field__error" id="e-phone"></p>
+      </div>
+
+      <div class="hp" aria-hidden="true">
+        <label>No completar<input name="website" type="text" tabindex="-1" autocomplete="off" /></label>
+      </div>
+
+      <button class="btn btn--solid" type="submit" data-submit data-label={form.submit} data-sending={form.sending}>{form.submit}</button>
+      <p class="quote__note" data-server-error hidden>{form.serverError}</p>
+    </form>
+  </div>
+</section>

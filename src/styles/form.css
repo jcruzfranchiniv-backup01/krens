@@ -1,0 +1,25 @@
+.quote { display: grid; gap: 36px; }
+.quote__form { display: grid; gap: 18px; background: var(--cream-3); border: 1px solid var(--line); padding: clamp(20px, 4vw, 40px); }
+.field { display: grid; gap: 6px; }
+.field label { font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 600; }
+.field input, .field select {
+  width: 100%; min-height: 50px; padding: 0 14px; border: 1px solid #b9b19b; border-radius: var(--radius);
+  background: #fff; color: var(--green); font: inherit; font-size: 1rem;
+}
+.field input::placeholder { color: #7a7d6c; }
+.field input:focus-visible, .field select:focus-visible { outline: 2px solid var(--green); outline-offset: 1px; }
+.field[data-invalid='true'] input, .field[data-invalid='true'] select { border-color: #9b2c1f; border-width: 2px; }
+.field__error { color: #8f2a1d; font-size: 0.85rem; display: none; }
+.field[data-invalid='true'] .field__error { display: block; }
+.field__error::before { content: '⚠ '; }
+.form-alert { display: none; border: 1px solid #9b2c1f; background: #fbeeea; color: #7c2218; padding: 12px 14px; border-radius: var(--radius); font-size: 0.92rem; }
+.form-alert[data-show='true'] { display: block; }
+.form-alert a { font-weight: 600; }
+.hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.quote__form .btn { width: 100%; min-height: 54px; }
+.quote__note { font-size: 0.8rem; color: var(--muted); text-align: center; }
+@media (min-width: 900px) {
+  .quote { grid-template-columns: 5fr 7fr; align-items: start; gap: 64px; }
+  .quote__form { grid-template-columns: 1fr 1fr; }
+  .quote__form .field--wide, .quote__form .btn, .quote__form .form-alert, .quote__note { grid-column: 1 / -1; }
+}

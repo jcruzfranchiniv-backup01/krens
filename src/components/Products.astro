@@ -1,0 +1,43 @@
+---
+import { site } from '../content';
+import { waLink } from '../lib/wa';
+import Photo from './Photo.astro';
+import Icon from './Icon.astro';
+
+const { products } = site;
+---
+
+<section class="section" id="productos" aria-labelledby="products-title">
+  <div class="container">
+    <header class="section-head reveal">
+      <p class="eyebrow">{products.eyebrow}</p>
+      <h2 id="products-title">{products.title}</h2>
+      <p>{products.intro}</p>
+    </header>
+    <ul class="cards cards--products">
+      {
+        products.items.map((item) => (
+          <li class="card card--product reveal">
+            <Photo name={item.image} alt={item.alt} sizes="(min-width: 980px) 360px, (min-width: 640px) 45vw, 92vw" ratio="4 / 3" />
+            <div class="card__body">
+              <h3 class="card__title">{item.label}</h3>
+              <hr class="card__rule" />
+              <p class="card__text">{item.text}</p>
+              <a
+                class="circle-btn card__action"
+                href={waLink('product', { producto: item.label.toLowerCase() })}
+                aria-label={`Consultar por ${item.label} por WhatsApp`}
+                data-wa
+                data-origin="product"
+                target="_blank"
+                rel="noopener"
+              >
+                <Icon name="arrow-right" />
+              </a>
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>

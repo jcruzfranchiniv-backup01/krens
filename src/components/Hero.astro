@@ -1,0 +1,38 @@
+---
+import { site } from '../content';
+import { waLink } from '../lib/wa';
+import Photo from './Photo.astro';
+import Icon from './Icon.astro';
+
+const { hero, brand } = site;
+---
+
+<section class="hero" aria-labelledby="hero-title">
+  <Photo
+    name={hero.image}
+    alt={hero.alt}
+    eager
+    widths={[640, 960, 1440, 1920]}
+    sizes="100vw"
+    ratio="16 / 9"
+  />
+  <div class="hero__veil"></div>
+  <svg class="badge" viewBox="0 0 130 130" role="img" aria-label={brand.badgeText}>
+    <defs><path id="badge-circle" d="M65 65 m-48 0 a48 48 0 1 1 96 0 a48 48 0 1 1 -96 0"></path></defs>
+    <text><textPath href="#badge-circle">{brand.badgeText} · </textPath></text>
+    <path class="icon" transform="translate(53 53) scale(1)" d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.5A4 4 0 0 1 19 10c0 5.6-7 10-7 10z" transform-origin="center"></path>
+  </svg>
+  <div class="container">
+    <div class="hero__content">
+      <p class="hero__eyebrow">{hero.eyebrow}</p>
+      <h1 id="hero-title">{hero.title}</h1>
+      <p class="hero__sub">{hero.subtitle}</p>
+      <div class="hero__ctas">
+        <a class="btn btn--solid" href="#cotizar" data-cta="hero">{hero.primaryCta}<Icon name="arrow-right" /></a>
+        <a class="btn btn--ghost" href={waLink('hero')} data-wa data-origin="hero" target="_blank" rel="noopener">
+          <Icon name="whatsapp" />{hero.secondaryCta}
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

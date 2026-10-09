@@ -1,0 +1,176 @@
+{
+  "_ayuda": "Archivo editable por el cliente. Textos y nombres de imágenes. Las imágenes van en src/assets/photos/ (fotos y promos) y src/assets/brand/ (logo y banner); en 'image' se escribe el nombre SIN extensión. Lo vacío no se muestra en producción.",
+  "brand": {
+    "name": "Krens",
+    "tagline": "Empresas & Eventos",
+    "logo": { "image": "logo", "alt": "Krens, fiambrería y sandwichería gourmet" },
+    "badgeText": "Fiambrería & Sandwichería Gourmet"
+  },
+  "contact": {
+    "whatsappNumber": "",
+    "address": "Irigoin 531, San Miguel, Buenos Aires",
+    "hours": [],
+    "instagramUrl": "https://www.instagram.com/krens_fiambreria/",
+    "instagramHandle": "@krens_fiambreria",
+    "linktreeUrl": "https://linktr.ee/",
+    "deliveryZones": []
+  },
+  "seo": {
+    "title": "Catering de sándwiches de miga y picadas para eventos | Krens – Zona Norte y Oeste GBA",
+    "description": "Catering de sándwiches de miga premium, picadas y tablas gourmet para empresas, hoteles y eventos en zona norte y oeste de GBA. Cotizá tu evento en 24 hs.",
+    "ogImage": "hero"
+  },
+  "whatsappMessages": {
+    "header": "Hola Krens! Quiero cotizar un evento.",
+    "hero": "Hola Krens! Quiero cotizar un evento y recibir una propuesta.",
+    "event": "Hola Krens! Quiero cotizar un evento {evento}.",
+    "product": "Hola Krens! Quiero consultar por {producto} para un evento.",
+    "promo": "Hola Krens! Quiero consultar por la promo {promo}.",
+    "closing": "Hola Krens! Quiero cotizar un evento.",
+    "fab": "Hola Krens! Quiero consultar por un evento.",
+    "footer": "Hola Krens! Quería hacerles una consulta.",
+    "thanks": "Hola Krens! Acabo de pedir una propuesta para un evento {evento} de {personas} personas."
+  },
+  "nav": [
+    { "label": "Eventos", "href": "#eventos" },
+    { "label": "Productos", "href": "#productos" },
+    { "label": "Empresas", "href": "#empresas" },
+    { "label": "Contacto", "href": "#contacto" }
+  ],
+  "headerCta": "Cotizar mi evento",
+  "hero": {
+    "eyebrow": "Gastronomía que une",
+    "title": "El sándwich de miga que tus invitados van a recordar.",
+    "subtitle": "Sándwiches de miga, picadas y tablas gourmet para empresas, hoteles y eventos. Cotizá en 24 hs.",
+    "primaryCta": "Cotizar mi evento",
+    "secondaryCta": "Hablar por WhatsApp",
+    "image": "hero",
+    "alt": "Sándwiches de miga premium sobre una tabla de madera"
+  },
+  "trust": {
+    "title": "Empresas y eventos que confían en Krens",
+    "stats": [
+      { "value": "", "label": "" },
+      { "value": "", "label": "" },
+      { "value": "", "label": "" }
+    ],
+    "logos": []
+  },
+  "promos": {
+    "eyebrow": "Promociones",
+    "title": "Propuestas del momento",
+    "intro": "",
+    "items": []
+  },
+  "inspire": {
+    "eyebrow": "Novedades",
+    "title": "Propuestas que inspiran",
+    "intro": "Descubrí nuestras opciones más elegidas para sorprender en cada encuentro.",
+    "slides": [
+      { "title": "Sándwiches de miga", "text": "Clásicos y especiales con ingredientes premium.", "image": "miga", "alt": "Bandeja de sándwiches de miga", "cta": "Ver más", "product": "sándwiches de miga" },
+      { "title": "Una experiencia para compartir", "kicker": "Tablas gourmet", "text": "Fiambres premium, quesos seleccionados y panes artesanales.", "image": "tabla", "alt": "Tabla de fiambres y quesos", "cta": "Ver más", "product": "tablas de fiambres y quesos" },
+      { "title": "Picadas personalizadas", "text": "Armadas a medida de tu evento y tus invitados.", "image": "picada", "alt": "Picada con fiambres, quesos y frutos secos", "cta": "Ver más", "product": "picadas personalizadas" },
+      { "title": "Opciones dulces", "text": "El toque perfecto para cerrar tu evento.", "image": "dulces", "alt": "Mini tartas y brownies", "cta": "Ver más", "product": "opciones dulces" }
+    ]
+  },
+  "events": {
+    "eyebrow": "Eventos que hacemos",
+    "title": "Un formato para cada ocasión",
+    "intro": "Elegí el tipo de evento y te armamos la propuesta.",
+    "cta": "Cotizar este evento",
+    "items": [
+      { "id": "corporativo", "label": "Corporativos y desayunos de trabajo", "text": "Reuniones, capacitaciones y desayunos con una mesa que luce.", "image": "evento-corporativo", "alt": "Desayuno de trabajo en una oficina", "wa": "corporativo" },
+      { "id": "hotel", "label": "Hoteles", "text": "Servicio confiable y presentación a la altura de tus huéspedes.", "image": "evento-hotel", "alt": "Catering para un evento de hotel", "wa": "para un hotel" },
+      { "id": "social", "label": "Casamientos y cumpleaños", "text": "Bocados y tablas para brindar con los tuyos.", "image": "evento-social", "alt": "Mesa de picadas en un cumpleaños", "wa": "social (casamiento o cumpleaños)" },
+      { "id": "coffee", "label": "Coffee breaks", "text": "Opciones saladas y dulces, listas para servir.", "image": "evento-coffee", "alt": "Coffee break con bocaditos", "wa": "coffee break" },
+      { "id": "catering", "label": "Catering y eventos privados", "text": "Propuestas a medida con barra y producción completa.", "image": "evento-catering", "alt": "Evento privado con barra de tragos", "wa": "de catering" }
+    ]
+  },
+  "products": {
+    "eyebrow": "Nuestros productos",
+    "title": "Lo gourmet también se comparte",
+    "intro": "Seleccionamos ingredientes de primera calidad para que cada bocado sea una experiencia.",
+    "items": [
+      { "label": "Sándwiches de miga", "text": "Clásicos y especiales, con ingredientes premium.", "image": "miga", "alt": "Sándwiches de miga" },
+      { "label": "Picadas personalizadas", "text": "Armadas a medida de tu evento.", "image": "picada", "alt": "Picada personalizada" },
+      { "label": "Fiambres y quesos", "text": "Variedad y calidad en cada tabla.", "image": "tabla", "alt": "Tabla de fiambres y quesos" },
+      { "label": "Bocaditos salados", "text": "Ideales para coffee breaks y reuniones.", "image": "bocaditos", "alt": "Bocaditos salados" },
+      { "label": "Opciones dulces", "text": "Postres y miniaturas gourmet para cerrar con broche de mesa.", "image": "dulces", "alt": "Opciones dulces" }
+    ]
+  },
+  "why": {
+    "eyebrow": "Por qué elegir Krens",
+    "title": "No es solo fiambre, es gourmet.",
+    "items": [
+      { "icon": "chef", "title": "Ingredientes premium", "text": "Seleccionamos lo mejor, siempre." },
+      { "icon": "star", "title": "Producto diferencial", "text": "Un sándwich de miga que se recuerda." },
+      { "icon": "people", "title": "Atención personalizada", "text": "Nos adaptamos a tus necesidades y al tipo de evento." },
+      { "icon": "calendar", "title": "Pedidos anticipados", "text": "Planificamos con tiempo para que todo salga bien." },
+      { "icon": "clock", "title": "Cumplimiento y puntualidad", "text": "Entregamos cuando y como lo acordamos." }
+    ]
+  },
+  "how": {
+    "eyebrow": "Cómo funciona",
+    "title": "Tres pasos y listo",
+    "steps": [
+      { "title": "Contanos tu evento", "text": "Tipo de evento, cantidad de personas y fecha estimada." },
+      { "title": "Recibí tu propuesta", "text": "Te respondemos con una propuesta a medida en 24 hs." },
+      { "title": "Nosotros lo preparamos y entregamos", "text": "Producimos y llevamos todo listo para servir." }
+    ]
+  },
+  "gallery": {
+    "eyebrow": "Galería",
+    "title": "Así se ve un evento Krens",
+    "items": [
+      { "type": "image", "image": "galeria-1", "alt": "Mesa de sándwiches de miga" },
+      { "type": "image", "image": "galeria-2", "alt": "Picada servida en un evento" },
+      { "type": "image", "image": "galeria-3", "alt": "Barra de tragos en un evento" },
+      { "type": "image", "image": "galeria-4", "alt": "Tabla de fiambres y quesos" },
+      { "type": "image", "image": "galeria-5", "alt": "Bocaditos salados" },
+      { "type": "image", "image": "galeria-6", "alt": "Opciones dulces" }
+    ]
+  },
+  "form": {
+    "eyebrow": "Cotización",
+    "title": "Pedí tu propuesta",
+    "intro": "Completá 5 datos y te respondemos en 24 hs.",
+    "fields": {
+      "name": { "label": "Nombre y empresa", "placeholder": "Ej: Ana Pérez, Acme S.A." },
+      "eventType": { "label": "Tipo de evento", "placeholder": "Elegí una opción" },
+      "guests": { "label": "Cantidad de personas", "placeholder": "Elegí un rango" },
+      "eventDate": { "label": "Fecha estimada (opcional)" },
+      "phone": { "label": "WhatsApp", "placeholder": "Ej: 11 5555 1234" }
+    },
+    "eventOptions": [
+      { "id": "corporativo", "label": "Corporativo / desayuno de trabajo" },
+      { "id": "hotel", "label": "Hotel" },
+      { "id": "social", "label": "Casamiento o cumpleaños" },
+      { "id": "coffee", "label": "Coffee break" },
+      { "id": "catering", "label": "Catering / evento privado" },
+      { "id": "otro", "label": "Otro" }
+    ],
+    "guestOptions": [
+      { "id": "hasta-20", "label": "Hasta 20 personas" },
+      { "id": "21-50", "label": "21 a 50 personas" },
+      { "id": "51-100", "label": "51 a 100 personas" },
+      { "id": "101-200", "label": "101 a 200 personas" },
+      { "id": "mas-200", "label": "Más de 200 personas" }
+    ],
+    "submit": "Quiero mi propuesta",
+    "sending": "Enviando…",
+    "errorSummary": "Revisá los campos marcados.",
+    "serverError": "No pudimos enviar tu pedido. Probá de nuevo o escribinos por WhatsApp."
+  },
+  "thanks": {
+    "title": "¡Gracias! Recibimos tu pedido",
+    "text": "Te vamos a responder con una propuesta en las próximas 24 hs. Si querés avanzar más rápido, escribinos por WhatsApp.",
+    "cta": "Continuar por WhatsApp",
+    "back": "Volver al inicio"
+  },
+  "closing": {
+    "title": "Tu próximo evento merece algo distinto",
+    "cta": "Hablar por WhatsApp",
+    "image": "banner",
+    "alt": ""
+  }
+}

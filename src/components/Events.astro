@@ -1,0 +1,31 @@
+---
+import { site } from '../content';
+import Photo from './Photo.astro';
+
+const { events } = site;
+---
+
+<section class="section section--alt" id="eventos" aria-labelledby="events-title">
+  <div class="container">
+    <header class="section-head reveal">
+      <p class="eyebrow">{events.eyebrow}</p>
+      <h2 id="events-title">{events.title}</h2>
+      <p>{events.intro}</p>
+    </header>
+    <ul class="cards cards--events">
+      {
+        events.items.map((event) => (
+          <li class="card reveal">
+            <Photo name={event.image} alt={event.alt} sizes="(min-width: 980px) 360px, (min-width: 640px) 45vw, 92vw" ratio="4 / 3" />
+            <div class="card__body">
+              <h3 class="card__title">{event.label}</h3>
+              <hr class="card__rule" />
+              <p class="card__text">{event.text}</p>
+              <a class="btn btn--ghost card__action" href="#cotizar" data-event={event.id}>{events.cta}</a>
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>

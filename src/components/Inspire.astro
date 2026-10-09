@@ -1,0 +1,43 @@
+---
+import { site } from '../content';
+import { waLink } from '../lib/wa';
+import Photo from './Photo.astro';
+import Icon from './Icon.astro';
+
+const { inspire } = site;
+---
+
+<section class="section" aria-labelledby="inspire-title" data-carousel>
+  <div class="container">
+    <div class="inspire__top">
+      <header class="section-head reveal">
+        <p class="eyebrow">{inspire.eyebrow}</p>
+        <h2 id="inspire-title">{inspire.title}</h2>
+        <p>{inspire.intro}</p>
+      </header>
+      <div class="inspire__nav">
+        <button class="circle-btn" type="button" aria-label="Anterior" data-carousel-prev><Icon name="arrow-left" /></button>
+        <button class="circle-btn" type="button" aria-label="Siguiente" data-carousel-next><Icon name="arrow-right" /></button>
+      </div>
+    </div>
+    <ul class="carousel" data-carousel-track tabindex="0" aria-label="Propuestas">
+      {
+        inspire.slides.map((slide) => (
+          <li class="slide">
+            <Photo name={slide.image} alt={slide.alt} sizes="(min-width: 900px) 62vw, 86vw" widths={[480, 800, 1100]} ratio="16 / 10" />
+            <div class="slide__veil"></div>
+            <div class="slide__body">
+              {slide.kicker && <p class="slide__kicker">{slide.kicker}</p>}
+              <h3>{slide.title}</h3>
+              <p class="slide__text">{slide.text}</p>
+              <a class="btn btn--light" href={waLink('product', { producto: slide.product })} data-wa data-origin="inspire" target="_blank" rel="noopener">
+                {slide.cta}<Icon name="arrow-right" />
+              </a>
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+    <div class="dots" data-carousel-dots></div>
+  </div>
+</section>

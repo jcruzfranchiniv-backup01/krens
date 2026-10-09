@@ -1,0 +1,31 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
+import TrustBar from '../components/TrustBar.astro';
+import Promos from '../components/Promos.astro';
+import Inspire from '../components/Inspire.astro';
+import Events from '../components/Events.astro';
+import Products from '../components/Products.astro';
+import Why from '../components/Why.astro';
+import How from '../components/How.astro';
+import Gallery from '../components/Gallery.astro';
+import QuoteForm from '../components/QuoteForm.astro';
+import Closing from '../components/Closing.astro';
+
+// Renderiza en cada pedido (con caché de borde de 60 s) para tomar las imágenes cargadas en /admin.
+export const prerender = false;
+---
+
+<Layout>
+  <Hero />
+  <TrustBar />
+  <Promos />
+  <Events />
+  <Inspire />
+  <Products />
+  <Why />
+  <How />
+  <Gallery />
+  <QuoteForm />
+  <Closing />
+</Layout>
